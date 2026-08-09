@@ -1,0 +1,213 @@
+---
+title: "Module 6 Worksheet"
+author: "Prepared by: The STA302H1 Teaching Team"
+output: pdf_document
+geometry: margin=0.5in
+urlcolor: blue
+---
+## Worksheet Information
+**Goal of the worksheet:**  
+  
+The Module 6 worksheet is an opportunity to apply decomposition-based tests to data and to better understand their reliance on the assumptions of linear regression models. By completing this worksheet, each student will be developing the skills to achieve the following weekly learning objectives:
+\begin{itemize}
+  \item State appropriate hypotheses for each decomposition-based test and correctly conduct and conclude each test in context.
+  \item Explain the limitations of the hypothesis tests arising from violated assumptions.
+  \item Integrate decomposition-based hypothesis tests into decision process when building models.
+\end{itemize}
+This worksheet, in addition to the remainder of the class time, is **important practice for completing questions on the final exam, and for your final project**.
+  
+\
+**Preparation assumed:**  
+
+\begin{itemize}
+\item Please complete this worksheet after attending your in-person lectures for each week. If you did not attend class, please review the annotated slides posted on Quercus.
+\item Additional R/Coding resources are also linked on the Quercus homepage.
+\end{itemize}
+
+\
+**How to complete this worksheet:**  
+  
+\begin{itemize}
+  \item Students may work and discuss this worksheet in small groups of 2-3 if desired. However {\bf each student} must submit their worksheet to MarkUs to receive their completion credit. Each student most work on their {\bf own copy} of the assignment.
+  \item All the code and course knowledge needed to complete this worksheet has been provided in the class materials. It may help to have these open while working on this document.
+  \item Follow the instructions provided in each question to complete the code.
+  \item DO NOT change the names of the variables that store your final answers.
+  \item When in doubt about a question in the worksheet or your code, ask a TA or the instructor during office hours or on the discussion board.
+\end{itemize}
+  
+\
+**Steps for submitting to MarkUs:**  
+
+\begin{enumerate}
+  \item Go to \href{https://markus.teach.cs.toronto.edu/markus}{MarkUs} and log in using your UofT credentials.
+  \item Select the STA302 course from the list.
+  \item Select Worksheet 6 from the assignment list.
+  \item Under Submissions, upload your Rmd file and select the file name from the list.
+  \item Go to Automated Testing and select Run Tests to check your worksheet answers.
+  \item You can submit as many times as you want, but only your latest submission before the deadline will be counted. 
+  \item It is recommended you submit your file to \href{https://markus.teach.cs.toronto.edu/markus}{MarkUs} after you complete each activity to check your answers before moving on. You can submit multiple times to check your work, as your autograding tokens regenerate over time. 
+  \item Even if you are out of autograding tokens, you can still submit your work. You just cannot check if your answers are correct yourself, but the tests will still be run by the instructor for grading. 
+  \item If you are having trouble with the submission process, please post on the discussion board.
+\end{enumerate}
+
+## What to do if a test fails on MarkUs
+
+\begin{enumerate}
+  \item Don't panic. Your work won't really be graded until the deadline, so start early to make sure you have lots of time to resolve issues before the deadline.
+  \item Read the message to get hints about what the problem is. For example "variable X not present" means that you may have a typo in your variable name.
+  \item Search on the discussion board to see if other classmates have encountered a similar error (and if not, consider posting a screenshot of the error message).
+  \item Sometimes, it will resolve the problem if you type out your values as a number (e.g. var <- 1) instead of a function (e.g. var <- round(...)).
+  \item Come to TA or instructor office hours with your issue.
+\end{enumerate}
+
+\newpage
+This week, we will be working with a dataset that comes with lots of interesting problems. The data `pgatour2006.csv` has been loaded to JupyterHub with your RMD worksheet. It contains the variables:
+
+  - $Y$, PrizeMoney = average prize money per tournament
+  - $X_1$, Driving Accuracy is the percent of time a player is able to hit the fairway with his tee shot.
+  - $X_2$, GIR, Greens in Regulation, is the percent of time a player was able to hit the green in regulation. A green is considered hit in regulation if any part of the ball is touching the putting surface and the number of strokes taken is two or less than par.
+  - $X_3$, Putting Average measures putting performance on those holes where the gree is hit in regulation (GIR).
+  - $X_4$, Birdie Conversion % is the percent of time a player makes a birdie or better after hitting the green in regulation
+  - $X_5$, SandSaves % is the percent of time a player was able to get "up and down" once in a greenside sand bunker.
+  - $X_6$, Scrambling % is the percent of time that a player misses the green in regulation, but still makes par or better.
+  - $X_7$, PuttsPerRound is the average total number of putts per round.
+
+We will be using this dataset to practice conducting ANOVA and partial F tests and documenting our decisions along the way.
+
+## 1) Fitting a Full Model with 7 Predictors
+
+Seven predictors are listed in the description above. Begin by loading the dataset `pgatour2006.csv` and looking at the `summary()` of this dataset. You are looking for the names of these 7 predictor variables and the response.  
+  
+Fit a multiple linear model using Prize Money as the response and the 7 other variables above as predictors. Replace `NULL` in the variable `full1` with this linear model fit using `lm()`.   
+  
+Display the full model summary of this `full1` using `summary(full1)`. How many predictors coefficients are not statistically different from 0 in this model? Store this integer value in `count` by replacing `NULL` with the number.
+
+```{r}
+# load the data
+pga <- read.csv(file="pgatour2006.csv", header=T)
+
+# fit the linear model with 7 listed predictors and response Prize Money
+full1 <- NULL
+#summary(full1)
+
+# how many coefficients are not statistically different from 0?
+count <- NULL
+```
+
+**Question: What is the conclusion of the ANOVA overall test of significance for this model?**  
+TYPE YOUR ANSWER BELOW:  
+  
+
+
+## 2) Fitting a Reduced Model
+
+Fit a new model using the `lm()` function that uses Prize Money as the response and includes only the significant predictors that were present in `full1`. Store this new model in the variable `reduced1` by replacing the `NULL` with the completed `lm()` model.  
+  
+Perform a Partial F test to compare the `full1` model with the `reduced1` model using the `anova()` function. Remember that the model with fewer predictors should be included in the function first, follwed by the model with more predictors.  
+  
+Replace `NULL` in the variable `Fvalue1` with the value corresponding to the *F statistic* for this test. Enter this value as a number as it appears in the output from `anova()`.
+
+```{r}
+# fit reduced model without insignificant predictors
+reduced1 <- NULL
+
+# conduct a partial F test
+
+
+# what is the value of F statistic?
+Fvalue1 <- NULL
+```
+
+**Question: What does this F statistic measure or tell us about the sums of squares of the two models?**  
+TYPE YOUR ANSWER BELOW:  
+  
+  
+## 3) Check assumptions of full model
+
+Begin by extracting the residuals and fitted values from the `full1` model to be used to create the plots. Store these in `e_hat` and `y_hat` respectively by replacing `NULL` with the approriate functions (see previous worksheets or Module 3 code for review).
+
+```{r}
+# extract residuals and fitted values from full1
+e_hat <- NULL
+y_hat <- NULL
+```
+
+Run the code below to produce ALL the plots needed to perform a complete residual analysis. You will need to uncomment these lines first. The `for` loop simply runs through all the predictors in the dataset and makes a Residuals vs Predictor plot for each.
+
+```{r, fig.width=8}
+#pairs(pga[,c(5,6,7,8,9,10,12)])
+```
+
+
+```{r, echo=F, fig.width=8, fig.height=11}
+#par(mfrow=c(4,3))
+#plot(pga$PrizeMoney ~ y_hat, ylab="Prize Money", xlab="Fitted")
+#plot(e_hat ~ y_hat, ylab="Residuals", xlab="Fitted")
+#for(i in c(5,6,7,8,9,10,12)){
+#  plot(e_hat ~ pga[,i], ylab="Residuals", xlab=names(pga)[i])
+#}
+#plot(e_hat, ylab="Residuals", xlab="Observation number")
+#qqnorm(e_hat)
+#qqline(e_hat)
+```
+
+**Question: What assumptions may be violated in this model?**  
+TYPE YOUR ANSWER BELOW:  
+  
+  
+Let's try a transformation on the response variable. In the variable `lnPrizeMoney`, replace `NULL` with a natural logarithm transformation of `pga$PrizeMoney`. Then fit a new full model in `full2` that uses the same predictors as `full1` but with `lnPrizeMoney` as the response.
+
+```{r}
+# transform PrizeMoney with log()
+lnPrizeMoney <- NULL
+
+# fit a new full model using transformed response
+full2 <- NULL
+```
+
+
+Finally, recheck a subset of these residual plots (the QQ plot, residual vs fitted, and condition 1). Start by extracting the residuals and fitted values from `full2` and store these in `e_hat2` and `y_hat2` respectively. Then uncomment the plot code to view the new plots.
+
+```{r, fig.width=8, fig.height=3}
+# extract residuals and fitted values
+e_hat2 <- NULL
+y_hat2 <- NULL
+
+# uncomment to see new plots
+#par(mfrow=c(1,3))
+#plot(lnPrizeMoney ~ y_hat2, ylab="Response", xlab="Fitted")
+#plot(e_hat2 ~ y_hat2, ylab="Residuals", xlab="Fitted")
+#qqnorm(e_hat2)
+#qqline(e_hat2)
+```
+
+
+## 4) Redo reduced model
+
+Look at the summary of the new full model `full2` using the `summary()` function. How many predictors are now not significantly different from 0?  
+  
+Fit a reduced model by including only the predictors that are significantly linearly related to the response in `full2`. Store this model in `reduced2`. Be sure to use the transformed response `lnPrizeMoney` in this model.  
+  
+Finally, conduct a Partial F test to see whether we would prefer the full model or the reduced model. Again use the `anova()` function to do this. Replace `NULL` in the variable `Fvalue2` with the value corresponding to the *F statistic* for this test. Enter this value as a number as it appears in the output from `anova()`.
+
+```{r}
+# look at summary of full2
+
+
+# fit model that removes insignificant predictors
+reduced2 <- NULL
+
+# conduct partial F test
+
+
+# what is the F statistic?
+Fvalue2 <- NULL
+```
+
+**Question: What is the conclusion of this partial F test?**  
+TYPE YOUR ANSWER BELOW:  
+  
+  
+
+-----------------
+END OF WORKSHEET - BE SURE TO SUBMIT YOUR WORKSHEET ON MARKUS TO RECEIVE COMPLETION CREDIT  
